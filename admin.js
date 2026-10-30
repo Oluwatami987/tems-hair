@@ -67,9 +67,9 @@
           const scale = Math.min(1, 900 / Math.max(image.width, image.height));
           const canvas = document.createElement('canvas'); canvas.width = Math.round(image.width * scale); canvas.height = Math.round(image.height * scale);
           canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
-          let quality = .78; let data = canvas.toDataURL('image/jpeg', quality);
-          while (data.length > 600000 && quality > .35) { quality -= .08; data = canvas.toDataURL('image/jpeg', quality); }
-          if (data.length > 700000) reject(new Error('Photo is too large after resizing. Choose a smaller photo.')); else resolve(data);
+          let quality = .72; let data = canvas.toDataURL('image/jpeg', quality);
+          while (data.length > 350000 && quality > .3) { quality -= .08; data = canvas.toDataURL('image/jpeg', quality); }
+          if (data.length > 350000) reject(new Error('Photo is too large after resizing. Choose a smaller photo.')); else resolve(data);
         };
         image.src = reader.result;
       };
@@ -86,8 +86,7 @@
     if (file) {
       try {
         const prepared = await optimizePhoto(file);
-        const uploaded = await api('/api/admin/image', { method: 'POST', body: JSON.stringify({ image: prepared }) });
-        image = uploaded.image;
+        image = prepared;
       } catch (error) { status.textContent = error.message || 'Could not upload that photo.'; return; }
     }
     if (!image) { status.textContent = 'Add a product image or choose a photo.'; return; }

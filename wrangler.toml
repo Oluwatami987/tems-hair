@@ -6,10 +6,7 @@ pages_build_output_dir = "."
 binding = "DB"
 database_name = "tems-hair-catalog"
 # Local placeholder. Replace with the real D1 ID before connecting a Pages project.
-database_id = "00000000-0000-0000-0000-000000000001"
+database_id = "8e30e73e-acfe-400c-9d81-032625c92f07"
 migrations_dir = "migrations"
 
-[[r2_buckets]]
-binding = "PRODUCT_IMAGES"
-bucket_name = "tems-hair-product-images"
 

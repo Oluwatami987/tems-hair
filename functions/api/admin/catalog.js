@@ -7,7 +7,9 @@ export async function onRequestPut({ request, env }) {
   if (!Array.isArray(products) || products.length > 200) return json({ error: 'Catalog must contain at most 200 products.' }, 400);
   const ids = new Set();
   for (const item of products) {
-    if (!item || !/^[a-zA-Z0-9_-]{1,80}$/.test(item.id) || ids.has(item.id) || !['extensions', 'ponytails'].includes(item.category) || typeof item.name !== 'string' || !item.name.trim() || item.name.length > 70 || !Number.isSafeInteger(Number(item.price)) || Number(item.price) < 0 || !Array.isArray(item.colors) || item.colors.length > 30 || typeof item.image !== 'string' || item.image.length > 700000 || !(/^(https:\/\/|\/?assets\/|\/?api\/images\/)/i.test(item.image))) return json({ error: 'One or more product entries are invalid. Use HTTPS photo links, uploaded photos, or existing assets.' }, 400);
+    const image = typeof item?.image === 'string' ? item.image : '';
+    const validImage = image.length <= 350000 && (/^(https:\/\/|\/?assets\/|\/?api\/images\/)/i.test(image) || /^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/.test(image));
+    if (!item || !/^[a-zA-Z0-9_-]{1,80}$/.test(item.id) || ids.has(item.id) || !['extensions', 'ponytails'].includes(item.category) || typeof item.name !== 'string' || !item.name.trim() || item.name.length > 70 || !Number.isSafeInteger(Number(item.price)) || Number(item.price) < 0 || !Array.isArray(item.colors) || item.colors.length > 30 || !validImage) return json({ error: 'One or more product entries are invalid. Use an HTTPS photo link, uploaded photo, or existing asset. Uploaded photos must be JPEG and under 250 KB.' }, 400);
     ids.add(item.id);
   }
   const batch = [env.DB.prepare('DELETE FROM products')];
