@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Manage products · Tems Hair</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin admin-manage">
+  <header class="atop"><div class="row1"><a href="index.html"><img src="assets/logo-wine.png" alt="Tems Hair home"></a><span class="badge">Catalog editor</span><a class="store-link" href="index.html">View store ↗</a><button type="button" class="btn btn-ghost btn-compact" id="logout">Sign out</button></div></header>
+  <main class="manage-main">
+    <div class="ah"><h1>Products</h1><p>Edit names, prices, photos, colours and availability.</p></div>
+    <div class="admin-preview-note"><b>Shared catalog</b><span>Changes saved here appear on the public store for every customer. Starter names and prices are examples; update them when Tems confirms the details.</span></div>
+    <section class="manage-form-card">
+      <div class="form-top"><div><span class="eyebrow">Catalog editor</span><h2 id="form-title">Add a product</h2></div><button type="button" class="btn btn-ghost btn-compact" id="clear-form">Clear</button></div>
+      <form id="product-form">
+        <input type="hidden" name="id">
+        <div class="manage-fields">
+          <label>Category<select name="category" required><option value="extensions">Extensions</option><option value="ponytails">Ponytails</option></select></label>
+          <label>Product name<input name="name" required maxlength="70" placeholder="e.g. Soft Wave Ponytail"></label>
+          <label>Price in naira<input name="price" type="number" min="0" step="500" required placeholder="e.g. 35000"></label>
+          <label>Type / style<input name="type" maxlength="40" placeholder="e.g. Braided, Straight, Curly"></label>
+          <label>Length or details<input name="detail" maxlength="70" placeholder='e.g. 18&quot; · Wavy'></label>
+          <label class="wide">Available colours <small>Separate colours with commas, e.g. 1B, 2, 99J</small><input name="colors" required value="1B" placeholder="1B, 2, 4"></label>
+          <label class="wide">Photo file<input name="imageFile" type="file" accept="image/*"><small>Choose a product photo. It is resized before uploading to the shared catalog.</small></label>
+          <label class="wide">Or use an image path / URL<input name="image" placeholder="assets/products/ext01.jpg"></label>
+          <label class="availability"><input name="available" type="checkbox" checked> Show this product on the store</label>
+        </div>
+        <div class="manage-form-actions"><button class="btn btn-wine" type="submit">Save product</button></div>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+    <section class="manage-form-card"><div class="form-top"><div><span class="eyebrow">Appointment information</span><h2>Preparation rules</h2></div></div><label class="wide" for="booking-rules">Show this notice before WhatsApp opens<textarea id="booking-rules" rows="5" maxlength="5000" placeholder="Add the appointment preparation rules here"></textarea></label><div class="manage-form-actions"><button class="btn btn-wine" type="button" id="save-rules">Save rules</button></div></section>
+    <section class="manage-list-section"><div class="list-head"><div><span class="eyebrow">Your items</span><h2>Catalog</h2></div><div class="catalog-tools"><button class="btn btn-ghost btn-compact" type="button" id="export-catalog">Export</button><label class="btn btn-ghost btn-compact import-btn">Import<input id="import-catalog" type="file" accept="application/json"></label></div></div><div id="manage-list" class="manage-list"></div></section>
+    <p class="admin-storage-note">The admin is protected by a PIN. Product changes and appointment rules are stored in the shared database.</p>
+  </main>
+  <script src="catalog-data.js"></script><script src="admin.js"></script>
+</body>
+</html>

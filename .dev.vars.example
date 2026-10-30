@@ -1,0 +1,2 @@
+ADMIN_PIN=choose-a-private-6-to-12-digit-pin
+SESSION_SECRET=replace-with-a-long-random-secret

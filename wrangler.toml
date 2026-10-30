@@ -1,0 +1,15 @@
+name = "tems-hair"
+compatibility_date = "2026-10-30"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tems-hair-catalog"
+# Local placeholder. Replace with the real D1 ID before connecting a Pages project.
+database_id = "00000000-0000-0000-0000-000000000001"
+migrations_dir = "migrations"
+
+[[r2_buckets]]
+binding = "PRODUCT_IMAGES"
+bucket_name = "tems-hair-product-images"
+
